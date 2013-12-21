@@ -1,14 +1,17 @@
+from common import BugModel
 from django.db import models
 
-class User(models.Model):
+
+class User(BugModel):
     name = models.CharField(max_length=100)
     email = models.CharField(max_length=100)
 
-class Repository(models.Model):
+
+class Repository(BugModel):
     location = models.URLField()
 
 
-class Project(models.Model):
+class Project(BugModel):
     developer = models.ForeignKey(User, related_name='projects_in_developer_role')
     documenter = models.ForeignKey(User, related_name='projects_in_documenter_role')
     maintainer = models.ForeignKey(User, related_name='projects_in_maintainer_role')
@@ -18,4 +21,5 @@ class Project(models.Model):
     download_page = models.URLField()
     repository = models.ForeignKey(Repository)
     wiki = models.URLField()
+
 
